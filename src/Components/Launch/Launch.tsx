@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { LaunchesQuery } from  '../../generated/graphql'
 import Failure from '../Utils/Failure/Failure'
-import Footer from '../Utils/Footer/Footer'
 import Success from '../Utils/Success/Success'
 import Upcoming from '../Utils/Upcoming/Upcoming'
 import './Launch.css'
@@ -38,8 +37,6 @@ const Launch: React.FC<Props> = ({data}) => {
                  )
                 )}
             </div>
-
-            <Footer />
 
         </div>
     )

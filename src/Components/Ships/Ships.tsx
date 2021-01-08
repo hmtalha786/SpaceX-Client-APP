@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { ShipsQuery } from '../../generated/graphql'
 import Active from '../Utils/Active/Active'
-import Footer from '../Utils/Footer/Footer'
 import InActive from '../Utils/InActive/InActive'
 import {Fade} from 'react-reveal'
 import './Ships.css'
@@ -37,7 +36,7 @@ const Ships: React.FC<Props> = ({data}) => {
             }
                               
             </div>
-            <Footer />
+            
         </div>
     )
 }

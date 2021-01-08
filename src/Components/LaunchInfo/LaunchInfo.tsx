@@ -4,7 +4,6 @@ import Success from '../Utils/Success/Success'
 import Failure from '../Utils/Failure/Failure'
 import Upcoming from '../Utils/Upcoming/Upcoming'
 import './LaunchInfo.css'
-import Footer from '../Utils/Footer/Footer'
 import {Fade} from 'react-reveal'
 
 interface Props {
@@ -49,7 +48,7 @@ const LaunchInfo: React.FC<Props> = ({data}) => {
            
            </div>
            </Fade>
-           <Footer />
+           
         </div>
     )
 }

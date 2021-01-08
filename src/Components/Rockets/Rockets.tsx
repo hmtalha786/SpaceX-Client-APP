@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { RocketsQuery } from '../../generated/graphql'
-import Footer from '../Utils/Footer/Footer'
 import './Rockets.css'
 import {Fade} from 'react-reveal'
 
@@ -32,7 +31,7 @@ const Rockets: React.FC<Props> = ({data}) => {
                 ))
             }
             </div>
-            <Footer />
+            
         </div>
     )
 }

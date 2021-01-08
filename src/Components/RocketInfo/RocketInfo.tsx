@@ -1,7 +1,6 @@
 import React from 'react'
 import { RocketInfoQuery } from '../../generated/graphql'
 import Active from '../Utils/Active/Active'
-import Footer from '../Utils/Footer/Footer'
 import InActive from '../Utils/InActive/InActive'
 import './RocketInfo.css'
 import {Fade} from 'react-reveal'
@@ -47,7 +46,7 @@ const RocketInfo: React.FC<Props> = ({data}) => {
                     </>
                 ) : <p className="not-found" >No Images Found</p>
             }</Fade>
-            <Footer />
+            
         </div>
     )
 }

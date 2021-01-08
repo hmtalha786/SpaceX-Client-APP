@@ -9,13 +9,11 @@ import RocketInfoPage from "./Components/RocketInfo/RocketInfoPage";
 import RocketPage from "./Components/Rockets/RocketPage";
 import ShipInfoPage from "./Components/ShipInfo/ShipInfoPage";
 import ShipsPage from "./Components/Ships/ShipsPage";
-import TopNav from "./Components/TopNav/TopNav";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <TopNav />
         <MainNav />
         <Routes>
           <Route path="/" element={<Home />} />

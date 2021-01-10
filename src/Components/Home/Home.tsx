@@ -50,12 +50,12 @@ const Home: React.FC = () => {
                     </div>
                 </Fade>
             </div>
-            
+
             <img className="spacex-img" src="https://www.teslarati.com/wp-content/uploads/2019/06/Starlink-coverage-Earth-SpaceX-2-crop.jpg" alt="spacex-img" />
-            
+
             <div className="footer">
-			    <p>Privacy Policy | Terms and Conditions | SpaceX © 2020</p>
-		    </div>
+                <p>Privacy Policy | Terms and Conditions | SpaceX © 2020</p>
+            </div>
         </div>
     )
 }

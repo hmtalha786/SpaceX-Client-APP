@@ -6,7 +6,7 @@ body{
     height: 750px;
     object-fit: cover;
     z-index: -1;
-    position: absolute;
+    position: relative;
 }
 h1{
     margin: 0;
@@ -89,6 +89,13 @@ a{
         top: 50%;
         margin-top: 200px;
     }
+}
+
+.footer {
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 @media only screen and (max-width: 1560px){

@@ -1,9 +1,8 @@
 body {
-  /* background-color: #292929; */
   background-image: url(https://free4kwallpapers.com/uploads/originals/2021/02/07/space-turksat-a-launch-wallpaper.jpg);
-  background-position: center; /* Center the image */
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; /*Resize the background image to cover the entire container*/
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;

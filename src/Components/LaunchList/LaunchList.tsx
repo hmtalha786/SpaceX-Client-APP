@@ -63,7 +63,7 @@ function LaunchList() {
     <div className="container">
       <h1 style={{ margin: "5% 0 4% 2%" }}>SpaceX Launches</h1>
       <div className="row mx-auto">
-        {data?.launches.map((launched, i) => (
+        {data?.launches.map((launch, i) => (
           <div key={i} className="col-md-6">
             <Card
               style={{ margin: "3% 0", borderRight: "50 solid red" }}
@@ -71,26 +71,26 @@ function LaunchList() {
               body
             >
               <h6 data-testid="title">
-                Mission: {launched.mission_name}
+                Mission: {launch.mission_name}
                 <div
                   style={{
                     width: "25px",
                     height: "25px",
                     borderRadius: "28px",
                     float: "right",
-                    backgroundColor: launched.launch_success ? "green" : "red",
+                    backgroundColor: launch.launch_success ? "green" : "red",
                   }}
                 ></div>
               </h6>
-              <h6>Rocket: {launched.rocket.rocket_name}</h6>
-              <h6>Site: {launched.launch_site.site_name}</h6>
+              <h6>Rocket: {launch.rocket.rocket_name}</h6>
+              <h6>Site: {launch.launch_site.site_name}</h6>
               <h6>
-                Year: {launched.launch_year}
-                <Link to={`${launched.mission_name}`}>
+                Year: {launch.launch_year}
+                <Link to={`${launch.mission_name}`}>
                   <button
                     type="button"
                     className={
-                      launched.launch_success
+                      launch.launch_success
                         ? `btn btn-outline-success float-right`
                         : `btn btn-outline-danger float-right`
                     }

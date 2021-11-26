@@ -15,6 +15,7 @@ interface DetailsI {
   launch_success: boolean;
   details: string;
   launch_site: {
+    site_name: string;
     site_name_long: string;
   };
   rocket: {
@@ -24,6 +25,7 @@ interface DetailsI {
   links: {
     article_link: string;
     flickr_images: Array<String>;
+    video_link: string;
   };
 }
 
@@ -39,11 +41,12 @@ export const GET_LAUNCH_DETAILS = gql`
   query getLaunchDetails($slug: String!) {
     launches(find: { mission_name: $slug }) {
       id
-      mission_name
       launch_success
+      mission_name
       launch_date_local
       details
       launch_site {
+        site_name
         site_name_long
       }
       rocket {
@@ -53,6 +56,7 @@ export const GET_LAUNCH_DETAILS = gql`
       links {
         article_link
         flickr_images
+        video_link
       }
     }
   }
@@ -78,47 +82,48 @@ function Details() {
         <Row style={{ margin: "5% auto" }}>
           <Col>
             {data?.launches.length !== 0 ? (
-              data?.launches.map((i) => (
-                <div key={i.mission_name}>
-                  <h3 data-testid="missionName">{i.mission_name}</h3>
-                  <p style={{ margin: "5% 0" }}>
-                    {i.details}
-                    <a
-                      href={
-                        i.links.article_link
-                          ? i.links.article_link.toString()
-                          : ""
-                      }
-                    >
-                      {" "}
-                      read more
-                    </a>
+              data?.launches.map((launch) => (
+                <div key={launch.mission_name}>
+                  <h3 data-testid="missionName">{launch.mission_name}</h3>
+                  <p style={{ margin: "0 0 3% 0" }}>
+                    {launch.details} ...
+                    <a href={launch.links.article_link}> Read More</a>
+                  </p>
+                  <p>
+                    Rocket launch video link is
+                    <a href={launch.links.video_link}> here</a>
                   </p>
                   <Table bordered hover variant="dark">
                     <tbody>
                       <tr>
-                        <td>Launch</td>
+                        <td>Status</td>
                         <td
                           style={{
-                            backgroundColor: i.launch_success ? "green" : "red",
+                            backgroundColor: launch.launch_success
+                              ? "green"
+                              : "red",
                           }}
                         ></td>
                       </tr>
                       <tr>
-                        <td>Launch Date</td>
-                        <td>{i.launch_date_local}</td>
+                        <td>Mission</td>
+                        <td>{launch.mission_name}</td>
+                      </tr>
+                      <tr>
+                        <td>Site</td>
+                        <td>{launch.launch_site.site_name}</td>
                       </tr>
                       <tr>
                         <td>Launch Site</td>
-                        <td>{i.launch_site.site_name_long}</td>
+                        <td>{launch.launch_site.site_name_long}</td>
                       </tr>
                       <tr>
                         <td>Rocket Name</td>
-                        <td>{i.rocket.rocket_name}</td>
+                        <td>{launch.rocket.rocket_name}</td>
                       </tr>
                       <tr>
                         <td>Rocket Type</td>
-                        <td>{i.rocket.rocket_type}</td>
+                        <td>{launch.rocket.rocket_type}</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -128,7 +133,7 @@ function Details() {
               <h3>No data availabe</h3>
             )}
           </Col>
-          <Col style={{ margin: "5% auto" }} lg={6}>
+          <Col style={{ margin: " auto" }} lg={4}>
             {data?.launches.map((img, i) => (
               <div key={i}>
                 {img.links.flickr_images[0] ? (

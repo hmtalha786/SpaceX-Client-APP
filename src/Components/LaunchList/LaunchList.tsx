@@ -7,15 +7,17 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Card from "react-bootstrap/Card";
 import "../../App.css";
 
-interface LaunchListI {
+interface LaunchListItems {
   id: string;
-  launch_date_local: string;
   launch_success: boolean;
   mission_name: string;
+  launch_year: string;
+  launch_site: { site_name: string };
+  rocket: { rocket_name: string };
 }
 
 interface LaunchListData {
-  launches: LaunchListI[];
+  launches: LaunchListItems[];
 }
 
 interface LaunchListVars {
@@ -23,13 +25,19 @@ interface LaunchListVars {
   limit: number;
 }
 
-export const GET_LAUNCH_INFO = gql`
+export const Get_Launch_Info = gql`
   query launches($limit: Int!, $offset: Int!) {
     launches(limit: $limit, offset: $offset) {
       id
-      launch_date_local
       launch_success
       mission_name
+      launch_year
+      launch_site {
+        site_name
+      }
+      rocket {
+        rocket_name
+      }
     }
   }
 `;
@@ -38,30 +46,32 @@ function LaunchList() {
   const { loading, data, fetchMore, networkStatus, error } = useQuery<
     LaunchListData,
     LaunchListVars
-  >(GET_LAUNCH_INFO, {
+  >(Get_Launch_Info, {
     variables: {
       offset: 0,
-      limit: 20,
+      limit: 10,
     },
     fetchPolicy: "cache-first",
     notifyOnNetworkStatusChange: true,
   });
 
-  if (error) return <p style={{ color: "#fff" }}>error loading data</p>;
+  if (error) return <p style={{ color: "#fff" }}>Error in loading data</p>;
+
   if (!data?.launches && loading) return <Loading />;
+
   return (
-    <div>
-      <h1 style={{ margin: "7% 0" }}>SpaceX Launches</h1>
-      <div>
+    <div className="container">
+      <h1 style={{ margin: "5% 0 4% 2%" }}>SpaceX Launches</h1>
+      <div className="row mx-auto">
         {data?.launches.map((launched, i) => (
-          <div key={i}>
+          <div key={i} className="col-md-6">
             <Card
-              style={{ margin: "5% 0", borderRight: "50 solid red" }}
+              style={{ margin: "3% 0", borderRight: "50 solid red" }}
               bg="dark"
               body
             >
-              <h3 data-testid="title">
-                LAUNCH: {launched.mission_name}
+              <h6 data-testid="title">
+                Mission: {launched.mission_name}
                 <div
                   style={{
                     width: "25px",
@@ -71,20 +81,24 @@ function LaunchList() {
                     backgroundColor: launched.launch_success ? "green" : "red",
                   }}
                 ></div>
-              </h3>
-              <p>Date: {launched.launch_date_local}</p>
-              <Link to={`${launched.mission_name}`}>
-                <button
-                  type="button"
-                  className={
-                    launched.launch_success
-                      ? `btn btn-outline-success`
-                      : `btn btn-outline-danger`
-                  }
-                >
-                  Launch Details
-                </button>
-              </Link>
+              </h6>
+              <h6>Rocket: {launched.rocket.rocket_name}</h6>
+              <h6>Site: {launched.launch_site.site_name}</h6>
+              <h6>
+                Year: {launched.launch_year}
+                <Link to={`${launched.mission_name}`}>
+                  <button
+                    type="button"
+                    className={
+                      launched.launch_success
+                        ? `btn btn-outline-success float-right`
+                        : `btn btn-outline-danger float-right`
+                    }
+                  >
+                    Launch Details
+                  </button>
+                </Link>
+              </h6>
             </Card>
 
             {i === data.launches.length - 3 && (

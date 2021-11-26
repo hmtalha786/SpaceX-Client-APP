@@ -1,18 +1,13 @@
-import ReactDOM from 'react-dom';
-import App from './App';
-import { ApolloProvider, InMemoryCache, ApolloClient } from '@apollo/client'
-
-
-const client = new ApolloClient({
-  uri: 'https://spacexdata.herokuapp.com/graphql',
-  cache: new InMemoryCache()
-})
-
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <React.StrictMode>
     <App />
-  </ApolloProvider>,
-  document.getElementById('root')
+  </React.StrictMode>,
+  document.getElementById("root")
 );
 
+serviceWorker.register();

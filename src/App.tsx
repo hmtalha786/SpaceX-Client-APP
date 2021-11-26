@@ -1,31 +1,32 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./Components/Home/Home";
-import LaunchPage from "./Components/Launch/LaunchPage";
-import LaunchInfoPage from "./Components/LaunchInfo/LaunchInfoPage";
-import MainNav from "./Components/MainNav/MainNav";
-import RocketInfoPage from "./Components/RocketInfo/RocketInfoPage";
-import RocketPage from "./Components/Rockets/RocketPage";
-import ShipInfoPage from "./Components/ShipInfo/ShipInfoPage";
-import ShipsPage from "./Components/Ships/ShipsPage";
+import LaunchList from "./Components/LaunchList/LaunchList";
+import Details from "./Components/Details/Details";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  ApolloClient,
+  ApolloProvider,
+  HttpLink,
+  InMemoryCache,
+} from "@apollo/client";
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: "https://api.spacex.land/graphql/",
+  }),
+});
 
 function App() {
   return (
-    <div className="App">
+    <ApolloProvider client={client}>
       <Router>
-        <MainNav />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/launches" element={<LaunchPage />} ></Route>
-          <Route path="/launches/:flight_number" element={<LaunchInfoPage />} /> 
-          <Route path="/rockets" element={<RocketPage />} />
-          <Route path="/rockets/:id" element={<RocketInfoPage />}  />
-          <Route path="/ships" element={<ShipsPage />} />
-          <Route path="/ships/:id" element={<ShipInfoPage />} />
+          <Route path="/" element={<LaunchList />} />
+          <Route path=":mission" element={<Details />} />
         </Routes>
       </Router>
-    </div>
+    </ApolloProvider>
   );
 }
 

@@ -77,14 +77,14 @@ function Details() {
   if (!data && loading) return <CircularProgress />;
 
   return (
-    <div>
+    <div data-testid="missionName">
       <Container style={{ margin: "3% auto" }}>
         <Row style={{ margin: "5% auto" }}>
           <Col>
             {data?.launches.length !== 0 ? (
               data?.launches.map((launch) => (
                 <div key={launch.mission_name}>
-                  <h3 data-testid="missionName">{launch.mission_name}</h3>
+                  <h3>{launch.mission_name}</h3>
                   <p style={{ margin: "0 0 3% 0" }}>
                     {launch.details} ...
                     <a href={launch.links.article_link}> Read More</a>

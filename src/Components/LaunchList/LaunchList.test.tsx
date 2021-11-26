@@ -1,13 +1,13 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
-import LaunchList, { GET_LAUNCH_INFO } from "./LaunchList";
+import LaunchList, { Get_Launch_Info } from "./LaunchList";
 import { MemoryRouter } from 'react-router';
 
 const mocks = [
   {
     request: {
-      query: GET_LAUNCH_INFO,
+      query: Get_Launch_Info,
       variables: {
         offset: 0,
         limit: 20,

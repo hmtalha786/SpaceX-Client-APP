@@ -3,8 +3,6 @@ import { render, cleanup } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
 import Details, { GET_LAUNCH_DETAILS } from "./Details";
 
-
-
 const mocks = [
   {
     request: {
